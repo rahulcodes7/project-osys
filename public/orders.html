@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders - Peddler</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="brand">Peddler</a>
+        <div class="nav-icons">
+            <a href="index.html" class="nav-icon">🍔</a> <a href="profile.html" class="nav-icon">👤</a>
+        </div>
+    </nav>
+
+    <div style="padding: 20px; max-width: 600px; margin: 60px auto 0;">
+        <h2>Past Orders</h2>
+        <div id="orders-list"></div>
+        <button class="primary-btn" id="load-more-btn" onclick="loadOrders(true)">View More</button>
+    </div>
+
+    <script src="js/index.js"></script>
+    <script>
+        // Init Orders Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            if(!localStorage.getItem('user')) window.location.href = 'index.html';
+            loadOrders();
+        });
+    </script>
+</body>
+</html>

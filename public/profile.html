@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Peddler</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="brand">Peddler</a>
+        <div class="nav-icons">
+            <a href="orders.html" class="nav-icon">📦</a>
+            <a href="index.html" class="nav-icon">🍔</a>
+        </div>
+    </nav>
+
+    <div style="padding: 20px; max-width: 600px; margin: 60px auto 0;">
+        <h2>My Profile</h2>
+        <div class="item-card" style="padding: 20px; margin-bottom: 20px;">
+            <p><strong>Mobile:</strong> <span id="profile-mobile"></span></p>
+        </div>
+        <h3>Saved Addresses</h3>
+        <div id="profile-addresses"></div>
+        <br>
+        <button class="primary-btn" onclick="window.location.href='index.html'">Return to Menu</button>
+        <br><br>
+        <button class="primary-btn" style="background: #ccc;" onclick="logout()">Logout</button>
+    </div>
+
+    <script src="js/index.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProfile();
+        });
+    </script>
+</body>
+</html>

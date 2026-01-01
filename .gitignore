@@ -1,2 +1,12 @@
+# Dependency folders (very heavy, re-installed on server)
 node_modules/
+
+# Secrets and Credentials (IMPORTANT: Never push these)
 .env
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Logs
+npm-debug.log*

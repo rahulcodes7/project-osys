@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peddler</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="brand">Peddler</a>
+        <div class="nav-icons" id="nav-rhs">
+            </div>
+    </nav>
+
+    <div class="main-container">
+        <aside class="sidebar" id="category-list">
+            </aside>
+
+        <main class="content" id="item-list">
+            </main>
+    </div>
+
+    <div class="fab-cart" id="view-cart-btn" onclick="openCart()">
+        🛒 View Cart <span id="cart-total-float">₹0</span>
+    </div>
+
+    <div class="popup-overlay" id="addon-popup">
+        <div class="popup-content">
+            <span class="close-btn" onclick="closePopup('addon-popup')">✕</span>
+            <div class="popup-header">Customize Item</div>
+            <div id="addon-list"></div>
+            <button class="primary-btn" id="confirm-addon-btn">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="popup-overlay" id="cart-popup">
+        <div class="popup-content">
+            <span class="close-btn" onclick="closePopup('cart-popup')">✕</span>
+            <div class="popup-header">Your Cart</div>
+            <div id="cart-items-container"></div>
+            <div style="margin-top: 20px; font-weight: bold; display: flex; justify-content: space-between;">
+                <span>Total</span>
+                <span id="cart-final-total">₹0</span>
+            </div>
+            <br>
+            <button class="primary-btn" onclick="proceedToAddress()">Select Address</button>
+        </div>
+    </div>
+
+    <div class="popup-overlay" id="login-popup">
+        <div class="popup-content">
+            <span class="close-btn" onclick="closePopup('login-popup')">✕</span>
+            <div class="popup-header">Login</div>
+            <div id="login-step-1">
+                <input type="tel" id="mobile-input" placeholder="Enter Mobile Number">
+                <button class="primary-btn" onclick="sendOtp()">Get OTP</button>
+            </div>
+            <div id="login-step-2" style="display:none;">
+                <input type="text" id="otp-input" placeholder="Enter OTP (Mock: 1234)">
+                <button class="primary-btn" onclick="verifyOtp()">Verify</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="popup-overlay" id="address-popup">
+        <div class="popup-content">
+            <span class="close-btn" onclick="closePopup('address-popup')">✕</span>
+            <div class="popup-header">Delivery Address</div>
+            
+            <h4>Saved Addresses</h4>
+            <div id="saved-addresses"></div>
+            
+            <h4>Search New Address</h4>
+            <input type="text" id="addr-search" placeholder="Type to filter..." onkeyup="filterAddresses()">
+            <div id="dummy-addresses" style="max-height: 150px; overflow-y: auto;"></div>
+
+            <hr style="margin: 15px 0;">
+            <input type="text" id="confirm-name" placeholder="Contact Name">
+            <input type="tel" id="confirm-contact" placeholder="Contact Number">
+            
+            <button class="primary-btn" id="place-order-btn" onclick="startPlaceOrder()">Place Order</button>
+            <div id="cancel-msg" style="text-align:center; display:none; color: red; font-size: 0.8rem;">Click again to Cancel</div>
+        </div>
+    </div>
+
+    <script src="js/index.js"></script>
+</body>
+</html>
