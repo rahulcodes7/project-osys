@@ -10,7 +10,7 @@ let orderTimer = null;
 let orderLimit = 7;
 
 // API Base URL
-const API_URL = 'http://localhost:3000/api';
+const API_URL = '/api';
 
 /* --- INITIALIZATION --- */
 document.addEventListener('DOMContentLoaded', () => {
