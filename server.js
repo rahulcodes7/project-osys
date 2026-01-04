@@ -98,7 +98,7 @@ app.post('/api/auth/otp', async (req, res) => {
             if (err) return res.status(500).json({ error: "DB Error" });
 
             // Send actual WhatsApp Message
-            const success = await sendWhatsAppOTP(mobile, otp);
+            const success = await sendWhatsAppOTP((mobile + "").trim(), otp);
             if (success) {
                 res.json({ success: true, message: "OTP sent via WhatsApp" });
             } else {
@@ -269,15 +269,15 @@ async function sendWhatsAppOTP(mobile, otp) {
     
     const payload = {
         messaging_product: "whatsapp",
-        to: mobile, // Format: 919876543210
+        to: "91" + mobile, // Format: 919876543210
         type: "template",
         template: {
             name: process.env.WA_TEMPLATE_NAME,
-            language: { code: "en_US" },
-            components: [{
-                type: "body",
-                parameters: [{ type: "text", text: otp }]
-            }]
+            language: { code: "en_US" }
+            // components: [{
+            //     type: "body",
+            //     parameters: [{ type: "text", text: otp }]
+            // }]
         }
     };
 
