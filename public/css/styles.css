@@ -118,3 +118,35 @@ input, select {
 
 /* Orders List */
 .order-card { background: white; padding: 15px; margin-bottom: 15px; border-radius: 10px; border-left: 5px solid var(--primary); box-shadow: var(--shadow); }
+
+/* Footer */
+.site-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    border-top: 1px solid var(--border);
+    padding: 12px 10px;
+    text-align: center;
+    font-size: 0.85rem;
+    box-shadow: 0 -2px 6px rgba(0,0,0,0.05);
+    z-index: 850;
+}
+
+.site-footer a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.site-footer a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+.footer-sep {
+    margin: 0 8px;
+    color: var(--text-light);
+}
