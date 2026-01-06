@@ -1,14 +1,13 @@
 require('dotenv').config();
 const express = require('express');
 const mysql = require('mysql2');
-const bodyParser = require('body-parser');
 const cors = require('cors');
 const axios = require('axios'); // For WhatsApp Cloud API
 const path = require('path');
 
 const app = express();
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // MySQL Connection
@@ -292,6 +291,26 @@ async function sendWhatsAppOTP(mobile, otp) {
         return false;
     }
 }
+
+// Webhook verification
+app.get('/webhook', (req, res) => {
+  const mode = req.query['hub.mode'];
+  const token = req.query['hub.verify_token'];
+  const challenge = req.query['hub.challenge'];
+
+  if (mode === 'subscribe' && token === process.env.VERIFY_TOKEN) {
+    console.log('Webhook verified');
+    return res.status(200).send(challenge);
+  }
+  return res.sendStatus(403);
+});
+
+// Webhook events
+app.post('/webhook', (req, res) => {
+  console.log('Webhook event received');
+  console.log(JSON.stringify(req.body, null, 2));
+  res.sendStatus(200);
+});
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
