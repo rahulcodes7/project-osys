@@ -13,7 +13,7 @@
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-body { background: var(--bg-grey); color: var(--text-dark); padding-bottom: 80px; }
+body { background: var(--bg-grey); color: var(--text-dark); padding-bottom: 50px; }
 
 /* Navbar */
 .navbar {
@@ -76,7 +76,7 @@ body { background: var(--bg-grey); color: var(--text-dark); padding-bottom: 80px
 
 /* Floating Cart Button */
 .fab-cart {
-    position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: white;
+    position: fixed; bottom: 50px; right: 20px; background: var(--primary); color: white;
     padding: 15px 25px; border-radius: 30px; box-shadow: 0 4px 12px rgba(255,107,0,0.4);
     font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 10px; z-index: 800;
 }
