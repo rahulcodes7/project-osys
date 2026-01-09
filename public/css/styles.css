@@ -119,26 +119,46 @@ input, select {
 /* Orders List */
 .order-card { background: white; padding: 15px; margin-bottom: 15px; border-radius: 10px; border-left: 5px solid var(--primary); box-shadow: var(--shadow); }
 
-/* Footer */
+/* Ultra-compact footer */
 .site-footer {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
+
+    height: 44px;
+    padding: 0 8px;
+
     background: var(--white);
     border-top: 1px solid var(--border);
-    padding: 12px 10px;
-    text-align: center;
-    font-size: 0.85rem;
-    box-shadow: 0 -2px 6px rgba(0,0,0,0.05);
+    box-shadow: 0 -1px 4px rgba(0,0,0,0.04);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    font-size: 0.68rem;
+    color: var(--text-light);
+    white-space: nowrap;
+    overflow-x: auto;        /* allows scroll if very small screen */
+    scrollbar-width: none;  /* Firefox */
     z-index: 850;
+}
+
+.site-footer::-webkit-scrollbar {
+    display: none;
+}
+
+.site-footer .biz-name {
+    font-weight: 700;
+    color: var(--text-dark);
 }
 
 .site-footer a {
     color: var(--primary);
-    text-decoration: none;
     font-weight: 600;
-    transition: color 0.2s ease;
+    text-decoration: none;
 }
 
 .site-footer a:hover {
@@ -146,7 +166,14 @@ input, select {
     text-decoration: underline;
 }
 
-.footer-sep {
-    margin: 0 8px;
+.site-footer .addr {
     color: var(--text-light);
+}
+
+.sep {
+    opacity: 0.35;
+}
+
+.footer-sep {
+    margin: 0 2px;
 }

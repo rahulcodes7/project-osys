@@ -29,8 +29,8 @@ function renderNavbar() {
     
     if (user) {
         rhs.innerHTML = `
-            <a href="orders.html" class="nav-icon">📦</a>
-            <a href="profile.html" class="nav-icon">👤</a>
+            <a href="/orders.html" class="nav-icon">📦</a>
+            <a href="/profile.html" class="nav-icon">👤</a>
         `;
     } else {
         rhs.innerHTML = `<span class="nav-icon" onclick="openLogin()">Login</span>`;
