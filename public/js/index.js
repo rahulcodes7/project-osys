@@ -1,7 +1,7 @@
 /* --- STATE MANAGEMENT --- */
 let categories = [];
 let items = [];
-let cart = JSON.parse(localStorage.getItem('peddler_cart')) || [];
+let cart = JSON.parse(localStorage.getItem('fsp_cart')) || [];
 let user = JSON.parse(localStorage.getItem('user')) || null;
 let currentCategory = 1;
 let selectedAddonItem = null; // Temporary holder for addon selection
@@ -235,7 +235,7 @@ function updateQty(itemId, delta, addons) {
 }
 
 function saveCart() {
-    localStorage.setItem('peddler_cart', JSON.stringify(cart));
+    localStorage.setItem('fsp_cart', JSON.stringify(cart));
     updateCartUI();
     // Re-render items if category view needs update (for non-addon items)
     if(document.getElementById('item-list')) renderItems(currentCategory);
