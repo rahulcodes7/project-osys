@@ -4,6 +4,7 @@ const mysql = require('mysql2');
 const cors = require('cors');
 const axios = require('axios'); // For WhatsApp Cloud API
 const path = require('path');
+const http = require('https');
 
 const app = express();
 app.use(cors());
@@ -56,7 +57,7 @@ app.get('/api/menu', (req, res) => {
                 name, 
                 price, 
                 image, 
-                addons_details 
+                description 
             FROM items`;
 
         db.query(itemSql, (err, itemsRaw) => {
@@ -74,10 +75,9 @@ app.get('/api/menu', (req, res) => {
                 name: item.name,
                 price: item.price,
                 image: item.image,
+                description: item.description,
                 // Ensure addons is an array (handle if it's returned as string or object)
-                addons: (typeof item.addons_details === 'string') 
-                        ? JSON.parse(item.addons_details) 
-                        : (item.addons_details || [])
+                addons: []
             }));
 
             // Send combined response
@@ -106,7 +106,7 @@ app.post('/api/auth/otp', async (req, res) => {
             if (err) return res.status(500).json({ error: "DB Error" });
 
             // Send actual WhatsApp Message
-            const success = await sendWhatsAppOTP((mobile + "").trim(), otp);
+            const success = await sendMsg91OTP(("91"  + "" + mobile).trim());
             if (success) {
                 res.json({ success: true, message: "OTP sent via WhatsApp" });
             } else {
@@ -319,6 +319,76 @@ app.post('/webhook', (req, res) => {
   console.log(JSON.stringify(req.body, null, 2));
   res.sendStatus(200);
 });
+
+async function sendMsg91OTP(mobile) {
+
+    const options = {
+        method: 'POST',
+        hostname: 'api.msg91.com',
+        port: null,
+        path: '/api/v5/widget/sendOtp',
+        headers: {
+            authkey: process.env.MSG91_API_KEY,
+            'content-type': 'application/json'
+        }
+    };
+
+    const req = http.request(options, function (res) {
+        const chunks = [];
+
+        res.on('data', function (chunk) {
+            chunks.push(chunk);
+        });
+
+        res.on('end', function () {
+            const body = Buffer.concat(chunks);
+            console.log(body.toString());
+        });
+    });
+
+    const data = JSON.stringify({
+        widgetId: process.env.WIDGET_ID,     // STRING
+        identifier: mobile                  // STRING, with country code
+    });
+
+    req.write(data);
+    req.end();
+}
+
+async function verifyMsg91OTP(sentOTPRequestId, otp) {
+    const options = {
+        method: 'POST',
+        hostname: 'api.msg91.com',
+        port: null,
+        path: '/api/v5/widget/verifyOtp',
+        headers: {
+            authkey: process.env.MSG91_API_KEY,
+            'content-type': 'application/json'
+        }
+    };
+
+    const req = http.request(options, function (res) {
+        const chunks = [];
+
+        res.on('data', function (chunk) {
+            chunks.push(chunk);
+        });
+
+        res.on('end', function () {
+            const body = Buffer.concat(chunks);
+            console.log(body.toString());
+        });
+    });
+
+    const data = JSON.stringify({
+        widgetId: process.env.WIDGET_ID,     // string
+        reqId: sentOTPRequestId,             // string (returned from sendOtp)
+        otp: otp.toString()                  // string
+    });
+
+    req.write(data);
+    req.end();
+}
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
